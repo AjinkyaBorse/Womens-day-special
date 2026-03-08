@@ -46,9 +46,10 @@
             position: absolute;
             filter: blur(80px);
             opacity: 0.6;
-            animation: float 3s infinite ease-in-out; /* Changed from 10s to 3s */
+            animation: float 3s infinite ease-in-out;
             z-index: -1;
         }
+
         .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #e2f0cb; animation-delay: 0s; }
         .blob-2 { bottom: -10%; right: -10%; width: 600px; height: 600px; background: #ffcad4; animation-delay: 2s; }
         .blob-3 { top: 40%; left: 40%; width: 400px; height: 400px; background: #b5ead7; animation-delay: 4s; }
@@ -90,99 +91,56 @@
         /* --- 3D GIFT BOX --- */
         .scene {
             perspective: 1000px;
-            width: 300px;
-            height: 300px;
+            width: 200px;
+            height: 200px;
             margin: 0 auto;
             position: relative;
         }
 
-       /* --- 3D GIFT BOX --- */
-.scene {
-    perspective: 1000px;
-    width: 200px;  /* Changed from 300px */
-    height: 200px; /* Changed from 300px */
-    margin: 0 auto;
-    position: relative;
-}
+        .gift-box {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s ease-in-out;
+        }
 
-.gift-box {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 1s ease-in-out;
-}
+        .gift-box.shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
 
-.gift-box.shake {
-    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-}
+        .gift-box.open {
+            transform: rotateX(10deg) rotateY(10deg);
+        }
 
-.gift-box.open {
-    transform: rotateX(10deg) rotateY(10deg);
-}
+        .face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: #ec008c;
+            border: 2px solid #fff;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+        }
 
-.face {
-    position: absolute;
-    width: 200px;  /* Changed from 300px */
-    height: 200px; /* Changed from 300px */
-    background: #ec008c;
-    border: 2px solid #fff;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
-}
+        .face.front  { transform: translateZ(100px); }
+        .face.back   { transform: rotateY(180deg) translateZ(100px); }
+        .face.right  { transform: rotateY(90deg) translateZ(100px); }
+        .face.left   { transform: rotateY(-90deg) translateZ(100px); }
+        .face.top    { transform: rotateX(90deg) translateZ(100px); background: #fc6767; }
+        .face.bottom { transform: rotateX(-90deg) translateZ(100px); }
 
-.face.front  { transform: translateZ(100px); }  /* Changed from 150px (half of 200px) */
-.face.back   { transform: rotateY(180deg) translateZ(100px); }
-.face.right  { transform: rotateY(90deg) translateZ(100px); }
-.face.left   { transform: rotateY(-90deg) translateZ(100px); }
-.face.top    { transform: rotateX(90deg) translateZ(100px); background: #fc6767; }
-.face.bottom { transform: rotateX(-90deg) translateZ(100px); }
-
-.ribbon-vertical {
-    position: absolute;
-    width: 30px;  /* Changed from 40px */
-    height: 100%;
-    background: #D4AF37;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.ribbon-horizontal {
-    position: absolute;
-    height: 30px;  /* Changed from 40px */
-    width: 100%;
-    background: #D4AF37;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.bow {
-    position: absolute;
-    top: -30px;  /* Changed from -40px */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;  /* Changed from 100px */
-    height: 50px; /* Changed from 60px */
-    background: #ec008c;
-    border-radius: 50%;
-    z-index: 10;
-}
-
-.bow::before, .bow::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 50px;  /* Changed from 60px */
-    height: 50px; /* Changed from 60px */
-    border-radius: 50%;
-    border: 4px solid #D4AF37; /* Changed from 5px */
-}
-
-.bow::before { left: -40px; transform: rotate(-20deg); }
-.bow::after { right: -40px; transform: rotate(20deg); }
+        .ribbon-vertical {
+            position: absolute;
+            width: 30px;
+            height: 100%;
+            background: #D4AF37;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
         .ribbon-horizontal {
             position: absolute;
-            height: 40px;
+            height: 30px;
             width: 100%;
             background: #D4AF37;
             top: 50%;
@@ -191,11 +149,11 @@
 
         .bow {
             position: absolute;
-            top: -40px;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 60px;
+            width: 80px;
+            height: 50px;
             background: #ec008c;
             border-radius: 50%;
             z-index: 10;
@@ -205,14 +163,14 @@
             content: '';
             position: absolute;
             top: 0;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            border: 5px solid #D4AF37;
+            border: 4px solid #D4AF37;
         }
 
-        .bow::before { left: -50px; transform: rotate(-20deg); }
-        .bow::after { right: -50px; transform: rotate(20deg); }
+        .bow::before { left: -40px; transform: rotate(-20deg); }
+        .bow::after { right: -40px; transform: rotate(20deg); }
 
         @keyframes shake {
             10%, 90% { transform: translate3d(-1px, 0, 0) rotate(-5deg); }
@@ -269,6 +227,37 @@
         @keyframes fall {
             to { transform: translateY(100vh) rotate(720deg); }
         }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .scene {
+                width: 150px;
+                height: 150px;
+            }
+            .face {
+                width: 150px;
+                height: 150px;
+            }
+            .face.front, .face.back, .face.right, .face.left, .face.top, .face.bottom {
+                transform: translateZ(75px);
+            }
+            .ribbon-vertical, .ribbon-horizontal {
+                width: 20px;
+                height: 20px;
+            }
+            .bow {
+                width: 60px;
+                height: 40px;
+                top: -25px;
+            }
+            .bow::before, .bow::after {
+                width: 40px;
+                height: 40px;
+                border-width: 3px;
+            }
+            .bow::before { left: -30px; }
+            .bow::after { right: -30px; }
+        }
     </style>
 </head>
 <body class="relative flex flex-col items-center justify-center min-h-screen">
@@ -296,7 +285,7 @@
                 Happy <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-500">Women's</span> Day
             </h1>
             <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-                Celebrating the strength, love, and beauty of every woman today and always. Happy Women’s Day!
+                Select the special woman in your life to reveal a personalized gift.
             </p>
 
             <div class="grid md:grid-cols-3 gap-6">
@@ -328,10 +317,11 @@
                 </div>
             </div>
         </div>
-        <br>
-        <br>
+
         <!-- Step 2: Gift Box (Hidden Initially) -->
         <div id="gift-screen" class="hidden flex-col items-center">
+            <h2 class="text-2xl font-bold text-gray-800 mb-8">Your gift is ready!</h2>
+            
             <div class="scene" id="giftScene">
                 <div class="gift-box" id="giftBox">
                     <div class="bow"></div>
@@ -360,7 +350,7 @@
         </div>
 
     </main>
-<br><br><br>
+
     <!-- Footer -->
     <footer class="absolute bottom-4 text-gray-400 text-sm">
         <p>Made with <i class="fa-solid fa-heart text-pink-500"></i> for you</p>
@@ -372,7 +362,7 @@
         const messages = {
             mom: {
                 title: "To My Dearest Mom",
-                text: "Mom, you are the reason I am who I am today.Your love, sacrifices, and strength inspire me every day.Happy Women’s Day ❤️"
+                text: "Mom, you are the reason I am who I am today. Your love, sacrifices, and strength inspire me every day. Happy Women's Day ❤️"
             },
             sister: {
                 title: "To My Amazing Sister",
@@ -384,93 +374,82 @@
             }
         };
 
-   // --- 2. Select Recipient Function ---
-function selectRecipient(person) {
-    const selectionScreen = document.getElementById('selection-screen');
-    const giftScreen = document.getElementById('gift-screen');
-    
-    if(selectionScreen) selectionScreen.classList.add('hidden');
-    if(giftScreen) {
-        giftScreen.classList.remove('hidden');
-        giftScreen.classList.add('flex');
-    }
-    
-    const giftBox = document.getElementById('giftBox');
-    if(giftBox) {
-        giftBox.classList.remove('open');
-        giftBox.classList.add('shake');
-    }
-    
-    triggerConfetti();
-    
-    const data = messages[person];
-    const titleEl = document.getElementById('recipientTitle');
-    const msgEl = document.getElementById('recipientMessage');
-    
-    if(titleEl) titleEl.innerText = data.title;
-    if(msgEl) msgEl.innerText = data.text;  // <-- Fixed: Added '=' operator
+        // --- 2. Select Recipient Function ---
+        function selectRecipient(person) {
+            const selectionScreen = document.getElementById('selection-screen');
+            const giftScreen = document.getElementById('gift-screen');
+            
+            if(selectionScreen) selectionScreen.classList.add('hidden');
+            if(giftScreen) {
+                giftScreen.classList.remove('hidden');
+                giftScreen.classList.add('flex');
+            }
+            
+            const giftBox = document.getElementById('giftBox');
+            if(giftBox) {
+                giftBox.classList.remove('open');
+                giftBox.classList.add('shake');
+            }
+            
+            triggerConfetti();
+            
+            const data = messages[person];
+            const titleEl = document.getElementById('recipientTitle');
+            const msgEl = document.getElementById('recipientMessage');
+            
+            if(titleEl) titleEl.innerText = data.title;
+            if(msgEl) msgEl.innerText = data.text;
 
-    // Show Message Card after box opens
-    setTimeout(() => {
-        if(giftBox) giftBox.classList.remove('shake');
-        if(giftBox) giftBox.classList.add('open');
-        
-        const messageCard = document.getElementById('messageCard');
-        if(messageCard) {
-            messageCard.classList.add('visible');
-        }
-    }, 500);
-}
-
-    // Show Message Card after box opens
-    setTimeout(() => {
-        if(giftBox) giftBox.classList.remove('shake');
-        if(giftBox) giftBox.classList.add('open');
-
-        const messageCard = document.getElementById('messageCard');
-        if(messageCard) {
-            messageCard.classList.add('visible');
-        }
-    }, 500);
-
-    // --- 3. Reset Gift Function ---
-    function resetGift() {
-        const selectionScreen = document.getElementById('selection-screen');
-        const giftScreen = document.getElementById('gift-screen');
-        const messageCard = document.getElementById('messageCard');
-        const giftBox = document.getElementById('giftBox');
-
-        if(selectionScreen) selectionScreen.classList.remove('hidden');
-        if(giftScreen) {
-            giftScreen.classList.add('hidden');
-            giftScreen.classList.remove('flex');
-        }
-        if(messageCard) messageCard.classList.remove('visible');
-        if(giftBox) {
-            giftBox.classList.remove('open');
-            giftBox.classList.add('shake');
-            setTimeout(() => giftBox.classList.remove('shake'), 500);
-        }
-    }
-
-    // --- 4. Confetti Effect ---
-    function triggerConfetti() {
-        const colors = ['#ec008c', '#fc6767', '#ffcd3c', '#ffffff', '#8e44ad'];
-
-        for (let i = 0; i < 50; i++) {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            document.body.appendChild(confetti);
-
-            // Remove confetti after animation
+            // Show Message Card after box opens
             setTimeout(() => {
-                confetti.remove();
-            }, 4000);
+                if(giftBox) giftBox.classList.remove('shake');
+                if(giftBox) giftBox.classList.add('open');
+                
+                const messageCard = document.getElementById('messageCard');
+                if(messageCard) {
+                    messageCard.classList.add('visible');
+                }
+            }, 500);
         }
-    }
-</script>
+
+        // --- 3. Reset Gift Function ---
+        function resetGift() {
+            const selectionScreen = document.getElementById('selection-screen');
+            const giftScreen = document.getElementById('gift-screen');
+            const messageCard = document.getElementById('messageCard');
+            const giftBox = document.getElementById('giftBox');
+
+            if(selectionScreen) selectionScreen.classList.remove('hidden');
+            if(giftScreen) {
+                giftScreen.classList.add('hidden');
+                giftScreen.classList.remove('flex');
+            }
+            if(messageCard) messageCard.classList.remove('visible');
+            if(giftBox) {
+                giftBox.classList.remove('open');
+                giftBox.classList.add('shake');
+                setTimeout(() => giftBox.classList.remove('shake'), 500);
+            }
+        }
+
+        // --- 4. Confetti Effect ---
+        function triggerConfetti() {
+            const colors = ['#ec008c', '#fc6767', '#ffcd3c', '#ffffff', '#8e44ad'];
+
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 4000);
+            }
+        }
+    </script>
 </body>
 </html>
